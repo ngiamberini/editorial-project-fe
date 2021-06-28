@@ -16,7 +16,10 @@
         </mat-form-field>
         <div *ngIf="profileForm.dirty && profileForm.invalid && profileForm.value.password.length === 0">la password è richiesta</div>
       </div>
-      <button [disabled]="profileForm.invalid" type="submit" mat-button>Login</button>
+      <button [disabled]="profileForm.invalid || isSubmitted" type="submit" mat-button>Login</button>
     </form>
   </mat-card-content>
 </mat-card>
+<div *ngIf="isSubmitted">
+  <mat-spinner></mat-spinner>
+</div>

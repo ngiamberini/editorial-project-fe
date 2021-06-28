@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { LoginModule } from './login/login.module';
 import { UserService } from 'src/services/user-service';
 import { HttpClientModule } from '@angular/common/http';
+import { EditorialProjectListModule } from './editorial-project-list/editorial-project-list.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     LoginModule,
+    EditorialProjectListModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
