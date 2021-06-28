@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EditorialProjectResolver } from 'src/resolvers/editorial-project-resolver';
 import { UserService } from 'src/services/user-service';
 import { EditorialProjectListComponent } from './editorial-project-list/editorial-project-list.component';
 import { LoginComponent } from './login/login-component.component';
@@ -12,12 +13,15 @@ const routes: Routes = [{
 },
 {
   path: 'editorial-projects',
-  component: EditorialProjectListComponent
+  component: EditorialProjectListComponent,
+  resolve: {
+    editorialProjects: EditorialProjectResolver
+  }
 }];
 
 @NgModule({
   imports: [LoginModule, RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers:[UserService]
+  providers: [UserService, EditorialProjectResolver]
 })
 export class AppRoutingModule { }

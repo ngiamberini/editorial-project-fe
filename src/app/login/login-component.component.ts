@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppSettings } from 'src/AppSettings';
 import { LoginModel } from 'src/models/login-model';
 import { LoginResponse } from 'src/models/login-response';
 import { UserService } from 'src/services/user-service';
@@ -33,8 +34,9 @@ export class LoginComponent implements OnInit {
       .subscribe((authParams: LoginResponse) => {
         console.log(authParams);
         this.isSubmitted = false;
-        localStorage.setItem('token', authParams.data.access_token);
-        localStorage.setItem('type', authParams.data.type);
+        localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_KEY, authParams.data.access_token);
+        localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_TYPE_KEY, authParams.data.type);
+
         // localStorage.setItem('user', authParams.data.user);
       });
     }

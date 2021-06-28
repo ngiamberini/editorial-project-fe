@@ -9,8 +9,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { LoginModule } from './login/login.module';
 import { UserService } from 'src/services/user-service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditorialProjectListModule } from './editorial-project-list/editorial-project-list.module';
+import { AuthInterceptor } from 'src/interceptors/auth-interceptors';
 @NgModule({
   declarations: [
     AppComponent
@@ -26,7 +27,11 @@ import { EditorialProjectListModule } from './editorial-project-list/editorial-p
     LoginModule,
     EditorialProjectListModule
   ],
-  providers: [UserService],
+  providers: [UserService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
