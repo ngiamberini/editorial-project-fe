@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppSettings } from 'src/AppSettings';
 import { LoginModel } from 'src/models/login-model';
 import { LoginResponse } from 'src/models/login-response';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   isSubmitted: boolean = false;
 
   constructor(formBuilder: FormBuilder,
-    private userService: UserService){
+    private userService: UserService,
+    private route: Router){
     this.profileForm = formBuilder.group({
       userName: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.minLength(8), Validators.required])
@@ -31,14 +33,21 @@ export class LoginComponent implements OnInit {
       this.isSubmitted = true;
       let loginModel = new LoginModel(this.profileForm.value.userName, this.profileForm.value.password);
       this.userService.login(loginModel)
-      .subscribe((authParams: LoginResponse) => {
-        console.log(authParams);
-        this.isSubmitted = false;
-        localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_KEY, authParams.data.access_token);
-        localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_TYPE_KEY, authParams.data.type);
+      .subscribe(
+        (authParams: LoginResponse) => {
+          console.log(authParams);
+          this.isSubmitted = false;
+          localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_KEY, authParams.data.access_token);
+          localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_TYPE_KEY, authParams.data.type);
+          localStorage.setItem('user', JSON.stringify(authParams.data.user));
 
-        // localStorage.setItem('user', authParams.data.user);
-      });
+          this.route.navigate(['/editorial-projects']);//verify performance!
+        },
+        (error) => {
+          console.log(error);
+          this.isSubmitted = false;
+        }
+      );
     }
   }
 

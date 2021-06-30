@@ -6,4 +6,12 @@ export class UserModel {
   name: string;
   role: RoleModel;
   roles: RoleModel[];
+
+  /**
+   *
+   */
+  constructor() {
+    this.email = 'n.giamberini@gmail.com';
+    this.id = 1;
+  }
 }
