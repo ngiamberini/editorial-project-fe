@@ -1,6 +1,11 @@
 <div style="width: 100%;">
-  <div>
-    <h2>Piani editoriali</h2>
+  <div class="title-filters">
+    <div>
+      <h2>Piani editoriali</h2>
+    </div>
+    <div class="filter">
+      <button mat-button color="primary" (click)="newEditorialProject()">Nuovo</button>
+    </div>
   </div>
   <table style="width: 100%;" mat-table [dataSource]="pagedEditorialProjects.data" class="mat-elevation-z8">
     <!-- Position Column -->

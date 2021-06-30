@@ -7,10 +7,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { EditorialProjectListComponent } from './editorial-project-list.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditorialProjectNewItemModalComponent } from '../editorial-project-new-item-modal/editorial-project-new-item-modal.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SectorsService } from 'src/services/sectors-service';
 
 @NgModule({
   declarations: [
-    EditorialProjectListComponent
+    EditorialProjectListComponent,
+    EditorialProjectNewItemModalComponent
   ],
   imports: [
     BrowserModule,
@@ -19,8 +24,11 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatSelectModule
   ],
+  providers:[SectorsService],
   exports: [
     EditorialProjectListComponent
   ]

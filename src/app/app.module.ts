@@ -12,6 +12,7 @@ import { UserService } from 'src/services/user-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditorialProjectListModule } from './editorial-project-list/editorial-project-list.module';
 import { AuthInterceptor } from 'src/interceptors/auth-interceptors';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +26,8 @@ import { AuthInterceptor } from 'src/interceptors/auth-interceptors';
     MatInputModule,
     MatButtonModule,
     LoginModule,
-    EditorialProjectListModule
+    EditorialProjectListModule,
+    MatDialogModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,

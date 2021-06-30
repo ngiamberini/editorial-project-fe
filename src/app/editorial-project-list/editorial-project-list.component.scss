@@ -1,0 +1,8 @@
+.title-filters{
+  display: flex;
+  justify-content: space-between;
+
+  >.filter {
+    padding-top: 20px;
+  }
+}
