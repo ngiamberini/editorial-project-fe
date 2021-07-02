@@ -1,5 +1,8 @@
 import { RoleModel } from "./role-model";
 
+export class PagedUserModel {
+  data: UserModel[];
+}
 export class UserModel {
   email: string;
   id: number;

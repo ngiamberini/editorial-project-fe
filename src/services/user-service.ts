@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { AppSettings } from "src/AppSettings";
 import { LoginModel } from "src/models/login-model";
 import { AuthData, LoginResponse } from "src/models/login-response";
+import { PagedUserModel } from "src/models/user-model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class UserService {
     let url = AppSettings.API_URL + 'api/v1/login';
 
     return this.http.post<LoginResponse>(url, loginModel);
+  }
+
+  getUsers(): Observable<PagedUserModel>{
+    return this.http.get<PagedUserModel>(AppSettings.API_URL + 'api/v1/users');
   }
 
   retrieveAuthorizationData(): LoginResponse {

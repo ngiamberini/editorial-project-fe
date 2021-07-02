@@ -2,7 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AppSettings } from "src/AppSettings";
-import { PagedEditorialProject } from "src/models/editorial-project-model";
+import { EditorialProject, PagedEditorialProject } from "src/models/editorial-project-model";
+import { EditorialProjectStoreModel } from "src/models/editorial-project-store-model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,9 @@ export class EditorialProjectService {
     let url = AppSettings.API_URL + 'api/v1/editorial-projects';
 
     return this.http.get<PagedEditorialProject>(url);
+  }
+
+  saveEditorialProject(request: EditorialProjectStoreModel): Observable<EditorialProject>{
+    return this.http.post<EditorialProject>(AppSettings.API_URL + 'api/v1/editorial-projects', request);
   }
 }

@@ -28,7 +28,7 @@ import { SectorsService } from 'src/services/sectors-service';
     MatDialogModule,
     MatSelectModule
   ],
-  providers:[SectorsService],
+  providers: [SectorsService],
   exports: [
     EditorialProjectListComponent
   ]
