@@ -1,0 +1,14 @@
+.card-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  >.my-card {
+    width: 30%;
+  }
+}
+.form-container{
+  display: flex;
+  flex-direction: column;
+}

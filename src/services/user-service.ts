@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { AppSettings } from "src/AppSettings";
 import { LoginModel } from "src/models/login-model";
 import { AuthData, LoginResponse } from "src/models/login-response";
-import { PagedUserModel } from "src/models/user-model";
+import { PagedUserModel, UserModel } from "src/models/user-model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +30,9 @@ export class UserService {
     return new LoginResponse(token, tokenType);
   }
 
+  getUserFromLocalStorage(): UserModel {
+    const user = localStorage.getItem('user');
+
+    return JSON.parse(user);
+  }
 }

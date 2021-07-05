@@ -18,18 +18,16 @@ import { EditorialProjectModalData, EditorialProjectNewItemModalComponent } from
 export class EditorialProjectListComponent implements OnInit {
   displayedColumns: string[] = ['N°', 'title', 'pages', 'price'];
 
-  pagedEditorialProjects: PagedEditorialProject = new PagedEditorialProject();
+  pagedEditorialProjects: PagedEditorialProject;
 
   constructor(route: ActivatedRoute,
     private dialog: MatDialog,
     private sectorService: SectorsService,
     private userService: UserService,
     private editorialProjectService: EditorialProjectService) {
-    // if (route.snapshot.data.editorialProjects as PagedEditorialProject){
-    //   this.pagedEditorialProjects = route.snapshot.data.editorialProjects;
-    // }
-
-    this.pagedEditorialProjects = new PagedEditorialProject();
+    if (route.snapshot.data.editorialProjects as PagedEditorialProject){
+      this.pagedEditorialProjects = route.snapshot.data.editorialProjects;
+    }
    }
 
   ngOnInit(): void {

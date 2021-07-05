@@ -45,9 +45,13 @@ export class EditorialProjectNewItemModalComponent implements OnInit {
 
   saveEditorialProject(){
     if (this.newEditorialProjectFormGroup.valid){
+      const publicationDate = new Date();
+
+      const formattedDate = `${publicationDate.getFullYear()}-${publicationDate.getMonth()}-${publicationDate.getDay()}`;
+
       let editorialProject = new EditorialProjectStoreModel(this.newEditorialProjectFormGroup.value.title,
         this.newEditorialProjectFormGroup.value.sectorId,
-        new Date(),
+        formattedDate ,
         this.newEditorialProjectFormGroup.value.pages,
         this.newEditorialProjectFormGroup.value.price,
         this.newEditorialProjectFormGroup.value.cost,

@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_TYPE_KEY, authParams.data.type);
           localStorage.setItem('user', JSON.stringify(authParams.data.user));
 
-          this.route.navigate(['/editorial-projects']);//verify performance!
+          this.route.navigate(['/home']);
         },
         (error) => {
           console.log(error);

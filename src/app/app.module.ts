@@ -1,18 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { LoginModule } from './login/login.module';
+import { LoginModule } from './components/login/login.module';
 import { UserService } from 'src/services/user-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { EditorialProjectListModule } from './editorial-project-list/editorial-project-list.module';
+import { EditorialProjectListModule } from './components/editorial-projects/editorial-project.module';
 import { AuthInterceptor } from 'src/interceptors/auth-interceptors';
-import { MatDialogModule } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent
@@ -23,11 +22,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
     LoginModule,
     EditorialProjectListModule,
-    MatDialogModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,
