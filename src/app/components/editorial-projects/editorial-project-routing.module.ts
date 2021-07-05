@@ -3,20 +3,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/guards/auth-gards.service';
 import { EditorialProjectResolver } from 'src/resolvers/editorial-project-resolver';
 import { UserService } from 'src/services/user-service';
+import { EditEditorialProjectComponent } from './edit-editorial-project/edit-editorial-project.component';
 import { EditorialProjectContainerComponent } from './editorial-project-container/editorial-project-container.component';
 import { EditorialProjectListComponent } from './editorial-project-list/editorial-project-list.component';
 
 const routes: Routes = [{
   path: '',
-  pathMatch: 'full',
   component: EditorialProjectContainerComponent,
   children: [
     {
       path: '',
-      pathMatch: 'full',
       component: EditorialProjectListComponent,
       canActivate: [AuthGuard],
-      resolve: { editorialProjects: EditorialProjectResolver }
+      resolve: { editorialProjects: EditorialProjectResolver },
+      // children: [
+
+      // ]
+    },
+    {
+      path: ':editorialProjectId',
+      component: EditEditorialProjectComponent
     }
   ]
 }];

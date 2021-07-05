@@ -15,12 +15,15 @@ import { CommonModule } from '@angular/common';
 import { EditorialProjectRoutingModule } from './editorial-project-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { EditEditorialProjectComponent } from './edit-editorial-project/edit-editorial-project.component';
 
 @NgModule({
   declarations: [
     EditorialProjectListComponent,
     EditorialProjectNewItemModalComponent,
-    EditorialProjectContainerComponent
+    EditorialProjectContainerComponent,
+    EditEditorialProjectComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
-    EditorialProjectRoutingModule
+    EditorialProjectRoutingModule,
+    MatIconModule
   ],
   providers: [SectorsService],
   exports: [

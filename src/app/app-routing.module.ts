@@ -15,13 +15,14 @@ const routes: Routes = [{
   children: [
     {
       path: '',
+      pathMatch: 'full',
       loadChildren: () => import('src/app/components/editorial-projects/editorial-project.module').then(m => m.EditorialProjectListModule)
     }
   ]
 },
 {
   path: '**',
-  redirectTo: 'home'
+  redirectTo: 'login'
 }];
 
 @NgModule({

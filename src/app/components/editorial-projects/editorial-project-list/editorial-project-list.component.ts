@@ -16,7 +16,7 @@ import { EditorialProjectModalData, EditorialProjectNewItemModalComponent } from
   styleUrls: ['./editorial-project-list.component.scss']
 })
 export class EditorialProjectListComponent implements OnInit {
-  displayedColumns: string[] = ['N°', 'title', 'pages', 'price'];
+  displayedColumns: string[] = ['N°', 'title', 'pages', 'price', 'approvedByCEO', 'approvedByEditorialDirector', 'approvedBySalesDirector', 'approvedByEditorialResponsible'];
 
   pagedEditorialProjects: PagedEditorialProject;
 
