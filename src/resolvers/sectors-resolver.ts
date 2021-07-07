@@ -1,8 +1,9 @@
+import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { SectorModel } from "src/models/sector-model";
 import { SectorsService } from "src/services/sectors-service";
-
+@Injectable()
 export class SectorResolver implements Resolve<SectorModel[]> {
 
   constructor(private sectorService: SectorsService){}

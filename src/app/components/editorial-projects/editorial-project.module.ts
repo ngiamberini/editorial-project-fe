@@ -17,7 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { EditEditorialProjectComponent } from './edit-editorial-project/edit-editorial-project.component';
-
 @NgModule({
   declarations: [
     EditorialProjectListComponent,

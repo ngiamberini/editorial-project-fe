@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/guards/auth-gards.service';
+import { AuthorsResolver } from 'src/resolvers/authors-resolver';
 import { EditorialProjectResolver } from 'src/resolvers/editorial-project-resolver';
+import { SectorResolver } from 'src/resolvers/sectors-resolver';
 import { UserService } from 'src/services/user-service';
 import { EditEditorialProjectComponent } from './edit-editorial-project/edit-editorial-project.component';
 import { EditorialProjectContainerComponent } from './editorial-project-container/editorial-project-container.component';
@@ -20,7 +22,7 @@ const routes: Routes = [{
     {
       path: ':editorialProjectId',
       component: EditEditorialProjectComponent,
-      resolve: { sectors: }
+      resolve: { sectors: SectorResolver, authors: AuthorsResolver}
     }
   ]
 }];
@@ -28,6 +30,6 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [UserService]
+  providers: [SectorResolver, AuthorsResolver]
 })
 export class EditorialProjectRoutingModule { }

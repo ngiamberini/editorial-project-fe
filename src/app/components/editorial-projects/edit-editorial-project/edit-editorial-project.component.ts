@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of, Subscription } from 'rxjs';
 import { EditorialProject } from 'src/models/editorial-project-model';
+import { SectorModel } from 'src/models/sector-model';
+import { UserModel } from 'src/models/user-model';
 import { EditorialProjectService } from 'src/services/editorial-projects-service';
 
 @Component({
@@ -16,13 +18,22 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
   editorialProjectSubscription$: Subscription;
 
   editorialProject: EditorialProject;
+  unmodifiedEditorialProject: EditorialProject;
   editEditorialProjectFormGroup: FormGroup;
+
+  sectors: SectorModel[];
+  authors: UserModel[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private editorialProjectService: EditorialProjectService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private router: Router) {
     this.editorialProjectId = this.activatedRoute.snapshot.params.editorialProjectId;
+
+    this.sectors = this.activatedRoute.snapshot.data.sectors;
+    this.authors = this.activatedRoute.snapshot.data.authors;
+
     this.loadForm();
   }
 
@@ -31,6 +42,7 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
       this.editorialProjectService.getEditorialProjectById(this.editorialProjectId, true).subscribe(
         (editorialProject) => {
           this.editorialProject = editorialProject;
+          this.unmodifiedEditorialProject = this.editorialProject;
           this.loadForm();
         }
       );
@@ -62,4 +74,18 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  reset(){
+    this.editorialProject = this.unmodifiedEditorialProject;
+    this.loadForm();
+  }
+
+  editEditorialProject(){
+    console.log('ciao');
+  }
+
+  back(){
+    this.router.navigate(['./home']);
+  }
+
 }

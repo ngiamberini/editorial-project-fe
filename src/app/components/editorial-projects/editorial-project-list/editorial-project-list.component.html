@@ -9,78 +9,121 @@
   </div>
   <table style="width: 100%;" mat-table [dataSource]="pagedEditorialProjects.data" class="mat-elevation-z8">
     <!-- Position Column -->
-    <ng-container matColumnDef="N°">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+    <div>
+      <ng-container fxFlex="2" matColumnDef="N°">
+        <th mat-header-cell *matHeaderCellDef> <div class="table-cell">  No.  </div></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-cell">
+            {{element.id}}
+          </div>
+        </td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container fxFlex="40" matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef><div class="table-cell">Title</div>  </th>
+        <td mat-cell *matCellDef="let element">
+           <div class="table-cell">
+            {{element.title}}
+           </div>
+        </td>
+      </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="pages">
-      <th mat-header-cell *matHeaderCellDef> Pages </th>
-      <td mat-cell *matCellDef="let element"> {{element.pages}} </td>
-    </ng-container>
+      <!-- Weight Column -->
+      <ng-container fxFlex="2" matColumnDef="pages">
+        <th mat-header-cell *matHeaderCellDef><div class="table-cell">Pages</div>  </th>
+        <td mat-cell *matCellDef="let element">
+           <div class="table-cell">
+            {{element.pages}}
+           </div>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-    </ng-container>
+      <ng-container fxFlex="2" matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef><div class="table-cell">Price</div>  </th>
+        <td mat-cell *matCellDef="let element">
+           <div class="table-cell">{{element.price}}</div>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="approvedByCEO">
-      <th mat-header-cell *matHeaderCellDef> Approved by CEO </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.is_approved_by_ceo" class="material-icons-outlined">
-          check_circle
-        </mat-icon>
-        <mat-icon *ngIf="!element.is_approved_by_ceo" class="material-icons-outlined">
-          cancel
-        </mat-icon>
-      </td>
-    </ng-container>
+      <ng-container fxFlex="2" matColumnDef="approvedByCEO">
+        <th mat-header-cell *matHeaderCellDef> <div class="table-cell">Approved by CEO</div> </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-cell">
+            <mat-icon *ngIf="element.is_approved_by_ceo" class="material-icons-outlined approved">
+              check_circle
+            </mat-icon>
+            <mat-icon *ngIf="!element.is_approved_by_ceo" class="material-icons-outlined rejected">
+              cancel
+            </mat-icon>
+          </div>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="approvedByEditorialDirector">
-      <th mat-header-cell *matHeaderCellDef> Approved by Editorial director </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.is_approved_by_editorial_director" class="material-icons-outlined">
-          check_circle
-        </mat-icon>
-        <mat-icon *ngIf="!element.is_approved_by_editorial_director" class="material-icons-outlined">
-          cancel
-        </mat-icon>
-      </td>
-    <!-- Symbol Column -->
-    </ng-container>
+      <ng-container fxFlex="2" matColumnDef="approvedByEditorialDirector">
+        <th mat-header-cell *matHeaderCellDef> <div class="table-cell">Approved by Editorial director</div> </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-cell">
+            <mat-icon *ngIf="element.is_approved_by_editorial_director" class="material-icons-outlined approved">
+              check_circle
+            </mat-icon>
+            <mat-icon *ngIf="!element.is_approved_by_editorial_director" class="material-icons-outlined rejected">
+              cancel
+            </mat-icon>
+          </div>
+        </td>
+      <!-- Symbol Column -->
+      </ng-container>
 
-    <ng-container matColumnDef="approvedBySalesDirector">
-      <th mat-header-cell *matHeaderCellDef> Approved by sales director </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.is_approved_by_editorial_responsible" class="material-icons-outlined">
-          check_circle
-        </mat-icon>
-        <mat-icon *ngIf="!element.is_approved_by_editorial_responsible" class="material-icons-outlined">
-          cancel
-        </mat-icon>
-      </td>
-    <!-- Symbol Column -->
-    </ng-container>
+      <ng-container fxFlex="2" matColumnDef="approvedBySalesDirector">
+        <th mat-header-cell *matHeaderCellDef><div class="table-cell">Approved by sales director</div>  </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-cell">
+            <mat-icon *ngIf="element.is_approved_by_editorial_responsible" class="material-icons-outlined approved">
+              check_circle
+            </mat-icon>
+            <mat-icon *ngIf="!element.is_approved_by_editorial_responsible" class="material-icons-outlined rejected">
+              cancel
+            </mat-icon>
+          </div>
+        </td>
+      <!-- Symbol Column -->
+      </ng-container>
 
-    <ng-container matColumnDef="approvedByEditorialResponsible">
-      <th mat-header-cell *matHeaderCellDef> Approved by editorial responsible </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="element.is_approved_by_sales_director" class="material-icons-outlined">
-          check_circle
-        </mat-icon>
-        <mat-icon *ngIf="!element.is_approved_by_sales_director" class="material-icons-outlined">
-          cancel
-        </mat-icon>
-      </td>
-    <!-- Symbol Column -->
-    </ng-container>
+      <ng-container fxFlex="2" matColumnDef="approvedByEditorialResponsible">
+        <th mat-header-cell *matHeaderCellDef><div class="table-cell"> Approved by editorial responsible </div></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-cell">
+            <mat-icon *ngIf="element.is_approved_by_sales_director" class="material-icons-outlined approved">
+              check_circle
+            </mat-icon>
+            <mat-icon *ngIf="!element.is_approved_by_sales_director" class="material-icons-outlined rejected">
+              cancel
+            </mat-icon>
+          </div>
+
+        </td>
+      <!-- Symbol Column -->
+      </ng-container>
+
+      <ng-container fxFlex="10" matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef><div class="table-cell">Actions</div></th>
+        <td mat-cell *matCellDef="let element">
+          <div style="display: flex; justify-content: space-between;">
+            <button routerLink="./{{element.id}}">
+              <mat-icon class="material-icons-outlined" style="color:rgba(251, 255, 0, 0.815)">
+                mode_edit
+              </mat-icon>
+            </button>
+            <button (click)="delete(element.id)">
+              <mat-icon class="material-icons-outlined" style="color: rgba(255, 51, 0, 0.89)">
+                delete
+              </mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+    </div>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

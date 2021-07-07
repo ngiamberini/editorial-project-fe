@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PagedEditorialProject } from 'src/models/editorial-project-model';
 import { EditorialProjectStoreModel } from 'src/models/editorial-project-store-model';
@@ -16,7 +16,16 @@ import { EditorialProjectModalData, EditorialProjectNewItemModalComponent } from
   styleUrls: ['./editorial-project-list.component.scss']
 })
 export class EditorialProjectListComponent implements OnInit {
-  displayedColumns: string[] = ['N°', 'title', 'pages', 'price', 'approvedByCEO', 'approvedByEditorialDirector', 'approvedBySalesDirector', 'approvedByEditorialResponsible'];
+  displayedColumns: string[] = [
+    'N°',
+    'title',
+    'pages',
+    'price',
+    'approvedByCEO',
+    'approvedByEditorialDirector',
+    'approvedBySalesDirector',
+    'approvedByEditorialResponsible',
+    'actions'];
 
   pagedEditorialProjects: PagedEditorialProject;
 
@@ -24,7 +33,8 @@ export class EditorialProjectListComponent implements OnInit {
     private dialog: MatDialog,
     private sectorService: SectorsService,
     private userService: UserService,
-    private editorialProjectService: EditorialProjectService) {
+    private editorialProjectService: EditorialProjectService,
+    private router: Router) {
     if (route.snapshot.data.editorialProjects as PagedEditorialProject){
       this.pagedEditorialProjects = route.snapshot.data.editorialProjects;
     }
@@ -65,5 +75,9 @@ export class EditorialProjectListComponent implements OnInit {
 
   retrieveSectors(): Observable<SectorModel[]> {
     return this.sectorService.getAll();
+  }
+
+  delete(id: number){
+
   }
 }

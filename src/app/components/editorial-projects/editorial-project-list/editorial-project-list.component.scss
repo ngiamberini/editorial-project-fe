@@ -6,3 +6,16 @@
     padding-top: 20px;
   }
 }
+
+.approved{
+  color: lightgreen;
+}
+
+.rejected {
+  color: rgba(255, 51, 0, 0.89)
+}
+
+.table-cell{
+  display: flex;
+  justify-content: center;
+}
