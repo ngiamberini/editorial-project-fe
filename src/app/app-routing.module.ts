@@ -15,7 +15,6 @@ const routes: Routes = [{
   children: [
     {
       path: '',
-      pathMatch: 'full',
       loadChildren: () => import('src/app/components/editorial-projects/editorial-project.module').then(m => m.EditorialProjectListModule)
     }
   ]

@@ -16,13 +16,11 @@ const routes: Routes = [{
       component: EditorialProjectListComponent,
       canActivate: [AuthGuard],
       resolve: { editorialProjects: EditorialProjectResolver },
-      // children: [
-
-      // ]
     },
     {
       path: ':editorialProjectId',
-      component: EditEditorialProjectComponent
+      component: EditEditorialProjectComponent,
+      resolve: { sectors: }
     }
   ]
 }];

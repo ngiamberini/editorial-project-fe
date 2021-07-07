@@ -1,3 +1,4 @@
+import { SectorModel } from "./sector-model";
 import { UserModel } from "./user-model";
 
 export class PagedEditorialProject {
@@ -5,9 +6,13 @@ export class PagedEditorialProject {
   meta: PagedMeta;
 }
 
+export class EditorialProjectResponse {
+  data: EditorialProject;
+}
+
 export class EditorialProject {
-  id : number;
-  title : string;
+  id: number;
+  title: string;
   is_approved_by_ceo: number;
   is_approved_by_editorial_director: number;
   is_approved_by_editorial_responsible: number;
@@ -17,6 +22,7 @@ export class EditorialProject {
   price: number;
   cost: number;
   author: UserModel;
+  sector: SectorModel;
 }
 
 export class PagedMeta {
