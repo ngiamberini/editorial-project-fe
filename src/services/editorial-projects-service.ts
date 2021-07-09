@@ -14,8 +14,9 @@ export class EditorialProjectService {
   baseUrl: string = AppSettings.API_URL + 'api/v1/editorial-projects';
   constructor(private http: HttpClient){}
 
-  getPagedEditorialProject(page: number, pageIndex: number): Observable<PagedEditorialProject>{
-    return this.http.get<PagedEditorialProject>(this.baseUrl);
+  getPagedEditorialProject(pageSize: number, pageIndex: number): Observable<PagedEditorialProject>{
+    let url= this.baseUrl + `?per_page=${pageSize}&page=${pageIndex}`;
+    return this.http.get<PagedEditorialProject>(url);
   }
 
   saveEditorialProject(request: EditorialProjectStoreModel): Observable<EditorialProject>{
@@ -30,5 +31,11 @@ export class EditorialProjectService {
     }
 
     return this.http.get<EditorialProjectResponse>(url).pipe(map((response) => response.data));
+  }
+
+  delete(id: number): Observable<EditorialProject> {
+    let url= this.baseUrl + `/${id}`;
+
+    return this.http.delete<EditorialProject>(url);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PagedEditorialProject } from 'src/models/editorial-project-model';
@@ -7,7 +8,9 @@ import { EditorialProjectStoreModel } from 'src/models/editorial-project-store-m
 import { SectorModel, SectorPagedModel } from 'src/models/sector-model';
 import { EditorialProjectService } from 'src/services/editorial-projects-service';
 import { SectorsService } from 'src/services/sectors-service';
+import { SnackBarService } from 'src/services/snack-bar-service';
 import { UserService } from 'src/services/user-service';
+import { DeleteModalComponent, DeleteModalData } from '../../shared/delete-modal/delete-modal.component';
 import { EditorialProjectModalData, EditorialProjectNewItemModalComponent } from '../editorial-project-new-item-modal/editorial-project-new-item-modal.component';
 
 @Component({
@@ -29,14 +32,20 @@ export class EditorialProjectListComponent implements OnInit {
 
   pagedEditorialProjects: PagedEditorialProject;
 
+  currentPage: number = 1;
+  pageSize: number = 10;
+
   constructor(route: ActivatedRoute,
     private dialog: MatDialog,
     private sectorService: SectorsService,
     private userService: UserService,
     private editorialProjectService: EditorialProjectService,
-    private router: Router) {
+    private router: Router,
+    private snackBarService: SnackBarService) {
     if (route.snapshot.data.editorialProjects as PagedEditorialProject){
       this.pagedEditorialProjects = route.snapshot.data.editorialProjects;
+      this.currentPage = this.pagedEditorialProjects.meta.current_page;
+      this.pageSize = this.pagedEditorialProjects.meta.per_page;
     }
    }
 
@@ -55,16 +64,16 @@ export class EditorialProjectListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((formValue) => {
 
-      this.editorialProjectService.saveEditorialProject(formValue).subscribe((value) => {
-        if(value != null){
-          this.reload();
-        }
+      this.editorialProjectService.saveEditorialProject(formValue).subscribe(
+        (value) => {
+         this.snackBarService.showMessage('Editorial project created successfully1');
+         this.reload();
       });
     });
   }
 
   reload(){
-    this.editorialProjectService.getPagedEditorialProject(0, 15).subscribe((editorialProjects) => {
+    this.editorialProjectService.getPagedEditorialProject(this.pageSize, this.currentPage,).subscribe((editorialProjects) => {
       this.pagedEditorialProjects = editorialProjects;
     });
   }
@@ -78,6 +87,29 @@ export class EditorialProjectListComponent implements OnInit {
   }
 
   delete(id: number){
+    const deleteData = new DeleteModalData(id, `Are you sure to delete element with id: ${id}`);
+    let deleteModalRef = this.dialog.open<DeleteModalComponent, DeleteModalData, number> (DeleteModalComponent, {
+      data: deleteData
+    });
 
+    deleteModalRef.afterClosed().subscribe(
+      (elementId: number) => {
+        if(elementId > 0){
+          this.editorialProjectService.delete(elementId).subscribe(
+            () => {
+              this.snackBarService.showMessage(`Element deleted successfully`);
+            },
+            (errMessage) => {}
+          );
+        }
+      }
+    );
+  }
+
+  changePagesOrSize($event: PageEvent){
+    this.currentPage = $event.pageIndex + 1;
+    this.pageSize = $event.pageSize;
+
+    this.reload();
   }
 }

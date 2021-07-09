@@ -17,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { EditEditorialProjectComponent } from './edit-editorial-project/edit-editorial-project.component';
+import { SharedModule } from '../shared/shared.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     EditorialProjectListComponent,
@@ -37,7 +39,9 @@ import { EditEditorialProjectComponent } from './edit-editorial-project/edit-edi
     MatDialogModule,
     MatSelectModule,
     EditorialProjectRoutingModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule,
+    MatPaginatorModule
   ],
   providers: [SectorsService],
   exports: [

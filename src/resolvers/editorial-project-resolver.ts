@@ -14,7 +14,7 @@ export class EditorialProjectResolver implements Resolve<PagedEditorialProject |
       return this.editorialProjectService.getEditorialProjectById(this.activatedRoute.snapshot.params.editorialProjectId, true);
     }
     else{
-      return this.editorialProjectService.getPagedEditorialProject(0, 15);
+      return this.editorialProjectService.getPagedEditorialProject(10, 1);
     }
   }
 

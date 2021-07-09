@@ -1,34 +1,34 @@
 <mat-dialog-content>
   <form [formGroup]="newEditorialProjectFormGroup">
     <div style="display: flex; flex-direction: column;">
-      <div>
+      <mat-form-field>
         <mat-label>Title</mat-label>
         <input matInput type="text" formControlName="title">
-      </div>
-      <div>
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Settore</mat-label>
         <mat-select formControlName="sectorId">
           <mat-option *ngFor="let sector of sectors$ | async" [value]="sector.id">{{sector.description}}</mat-option>
         </mat-select>
-      </div>
-      <div>
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Autori</mat-label>
         <mat-select formControlName="authorId">
           <mat-option *ngFor="let author of authors" [value]="author.id">{{author.email}}</mat-option>
         </mat-select>
-      </div>
-      <div>
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Pagine</mat-label>
         <input matInput type="number" formControlName="pages"/>
-      </div>
-      <div>
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Prezzo</mat-label>
         <input matInput type="number" formControlName="price"/>
-      </div>
-      <div>
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Costo</mat-label>
         <input matInput type="number" formControlName="cost"/>
-      </div>
+      </mat-form-field>
     </div>
   </form>
 </mat-dialog-content>
