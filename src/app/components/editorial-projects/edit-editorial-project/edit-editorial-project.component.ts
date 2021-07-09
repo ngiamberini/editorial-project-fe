@@ -33,7 +33,6 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
 
     this.sectors = this.activatedRoute.snapshot.data.sectors;
     this.authors = this.activatedRoute.snapshot.data.authors;
-
     this.loadForm();
   }
 

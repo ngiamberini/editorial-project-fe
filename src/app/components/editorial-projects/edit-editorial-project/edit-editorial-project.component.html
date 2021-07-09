@@ -42,8 +42,8 @@
     </mat-card-content>
     <mat-dialog-actions style="display: flex; justify-content: flex-end;">
       <button mat-button color="warn" (click)="back()">BACK</button>
-      <button mat-button color="accent" (click)="reset()">RESET</button>
-      <button mat-button (click)="editEditorialProject()" color="primary">SALVA</button>
+      <button mat-button [disabled]="!editEditorialProjectFormGroup.dirty" color="accent" (click)="reset()">RESET</button>
+      <button mat-button [disabled]="(editEditorialProjectFormGroup.invalid && editEditorialProjectFormGroup.dirty)" (click)="editEditorialProject()" color="primary">SALVA</button>
     </mat-dialog-actions>
   </mat-card>
 </div>
