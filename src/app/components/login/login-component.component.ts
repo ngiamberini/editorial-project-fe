@@ -35,13 +35,10 @@ export class LoginComponent implements OnInit {
       this.userService.login(loginModel)
       .subscribe(
         (authParams: LoginResponse) => {
-          console.log(authParams);
-          this.isSubmitted = false;
-          localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_KEY, authParams.data.access_token);
-          localStorage.setItem(AppSettings.LOCAL_STORAGE_TOKEN_TYPE_KEY, authParams.data.type);
-          localStorage.setItem('user', JSON.stringify(authParams.data.user));
+          this.userService.storeLoggedUser(authParams.data);
 
           this.route.navigate(['/home']);
+          this.isSubmitted = false;
         },
         (error) => {
           console.log(error);

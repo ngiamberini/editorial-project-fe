@@ -1,11 +1,13 @@
 <div class="container-app">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <a routerLink="/home">
-        <span>Editrial Project Management</span>
-      </a>
       <span class="spacer"></span>
-      <mat-icon aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+      <button mat-button *ngIf="!logged" (click)="goToLogin()">
+        <mat-icon>login</mat-icon>
+      </button>
+      <button mat-button *ngIf="logged" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 

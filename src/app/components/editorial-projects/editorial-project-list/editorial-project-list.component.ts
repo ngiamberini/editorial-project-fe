@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PagedEditorialProject } from 'src/models/editorial-project-model';
+import { EditEditorialProject, EditorialProject, PagedEditorialProject } from 'src/models/editorial-project-model';
 import { EditorialProjectStoreModel } from 'src/models/editorial-project-store-model';
 import { SectorModel, SectorPagedModel } from 'src/models/sector-model';
 import { EditorialProjectService } from 'src/services/editorial-projects-service';
@@ -34,7 +34,7 @@ export class EditorialProjectListComponent implements OnInit {
 
   currentPage: number = 1;
   pageSize: number = 10;
-
+  loggedUserCanApprove: boolean = false;
   constructor(route: ActivatedRoute,
     private dialog: MatDialog,
     private sectorService: SectorsService,
@@ -111,5 +111,59 @@ export class EditorialProjectListComponent implements OnInit {
     this.pageSize = $event.pageSize;
 
     this.reload();
+  }
+
+  approve(project: EditorialProject) {
+    this.loggedUserCanApprove = this.userService.canApproveEditorialProject(project);
+
+    if(this.loggedUserCanApprove){
+      let request = this.getUpdatedEditorialPrject(project);
+
+      this.editorialProjectService.edit(request.id, request).subscribe(
+        (result) => {
+          if(result){
+            this.snackBarService.showMessage('Editorial project approved successfully');
+            this.reload();
+          }
+        },
+        (error) => {
+          debugger;
+          this.snackBarService.showMessage('Error during approvement process');
+        }
+      )
+    }
+  }
+
+  getUpdatedEditorialPrject(project: EditorialProject) {
+    let updatedEditorialProject: EditEditorialProject = {
+      id : project.id,
+      title: project.title,
+      is_approved_by_ceo: project.is_approved_by_ceo,
+      is_approved_by_editorial_director: project.is_approved_by_editorial_director,
+      is_approved_by_editorial_responsible: project.is_approved_by_editorial_responsible,
+      is_approved_by_sales_director: project.is_approved_by_sales_director,
+      publication_date: project.publication_date,
+      pages: project.pages,
+      price: project.price,
+      cost: project.cost,
+      author_id: project.author_id,
+      sector_id: project.sector_id
+    };
+
+    let loggedUser  = this.userService.getUserFromLocalStorage();
+
+    switch(loggedUser.role.name) {
+      case 'Editorial responsible':
+        updatedEditorialProject.is_approved_by_editorial_responsible = true;
+        break;
+      case 'Sales director':
+        updatedEditorialProject.is_approved_by_sales_director = true;
+        break;
+      case 'Editorial director':
+        updatedEditorialProject.is_approved_by_editorial_director = true;
+        break;
+    }
+
+    return updatedEditorialProject;
   }
 }

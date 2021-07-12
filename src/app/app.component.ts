@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppSettings } from 'src/AppSettings';
+import { UserService } from 'src/services/user-service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,22 @@ import { AppSettings } from 'src/AppSettings';
 })
 export class AppComponent {
   title = 'EditorialProject';
+  logged= false;
+  constructor(private userService: UserService,
+    private router: Router){
+    this.logged = this.userService.isLoggedIn();
 
-  constructor(){
+    if(this.logged){
+      this.router.navigate(['./home']);
+    }
+  }
+
+  goToLogin(){
+    this.logout();
+  }
+
+  logout(){
+    this.userService.logout();
+    this.router.navigate(['./login']);
   }
 }

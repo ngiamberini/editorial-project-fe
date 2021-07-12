@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
-import { EditorialProject } from 'src/models/editorial-project-model';
+import { EditEditorialProject, EditorialProject } from 'src/models/editorial-project-model';
 import { SectorModel } from 'src/models/sector-model';
 import { UserModel } from 'src/models/user-model';
 import { EditorialProjectService } from 'src/services/editorial-projects-service';
@@ -86,7 +86,9 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
   editEditorialProject(){
     if(this.editEditorialProjectFormGroup.valid){
       this.submitted = true;
-      this.editorialProjectService.edit(this.editorialProject.id, this.editEditorialProjectFormGroup.value).subscribe(
+      let request = new EditEditorialProject(this.editorialProject.id, this.editEditorialProjectFormGroup.value);
+
+      this.editorialProjectService.edit(request.id, request).subscribe(
         (result) => {
           if(result){
             this.snackBarService.showMessage('Editorial Project edited successfully');
