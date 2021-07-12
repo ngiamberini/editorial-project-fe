@@ -6,6 +6,7 @@ import { EditorialProject } from 'src/models/editorial-project-model';
 import { SectorModel } from 'src/models/sector-model';
 import { UserModel } from 'src/models/user-model';
 import { EditorialProjectService } from 'src/services/editorial-projects-service';
+import { SnackBarService } from 'src/services/snack-bar-service';
 
 @Component({
   selector: 'app-edit-editorial-project',
@@ -24,11 +25,14 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
   sectors: SectorModel[];
   authors: UserModel[];
 
+  submitted = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private editorialProjectService: EditorialProjectService,
     private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private snackBarService: SnackBarService) {
     this.editorialProjectId = this.activatedRoute.snapshot.params.editorialProjectId;
 
     this.sectors = this.activatedRoute.snapshot.data.sectors;
@@ -80,7 +84,17 @@ export class EditEditorialProjectComponent implements OnInit, OnDestroy {
   }
 
   editEditorialProject(){
-    console.log('ciao');
+    if(this.editEditorialProjectFormGroup.valid){
+      this.submitted = true;
+      this.editorialProjectService.edit(this.editorialProject.id, this.editEditorialProjectFormGroup.value).subscribe(
+        (result) => {
+          if(result){
+            this.snackBarService.showMessage('Editorial Project edited successfully');
+            this.router.navigate(['./home']);
+          }
+        }
+      )
+    }
   }
 
   back(){

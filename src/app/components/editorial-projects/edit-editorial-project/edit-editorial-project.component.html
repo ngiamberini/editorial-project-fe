@@ -1,49 +1,51 @@
-<div style="padding: 3%;">
-  <h3>Edit editorial project: {{editorialProjectId}}</h3>
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="editEditorialProjectFormGroup">
-        <div style="display: flex; flex-direction: column;">
-            <mat-form-field>
-              <mat-label>Title</mat-label>
-              <input matInput type="text" formControlName="title">
-            </mat-form-field>
+<div class="edit-container">
+  <div class="card-container">
+    <h3>Edit editorial project: {{editorialProjectId}}</h3>
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="editEditorialProjectFormGroup">
+          <div style="display: flex; flex-direction: column;">
+              <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput type="text" formControlName="title">
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Settore</mat-label>
-              <mat-select formControlName="sectorId">
-                <mat-option *ngFor="let sector of sectors" [value]="sector.id">{{sector.description}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Settore</mat-label>
+                <mat-select formControlName="sectorId">
+                  <mat-option *ngFor="let sector of sectors" [value]="sector.id">{{sector.description}}</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Autori</mat-label>
-              <mat-select formControlName="authorId">
-                <mat-option *ngFor="let author of authors" [value]="author.id">{{author.email}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Autori</mat-label>
+                <mat-select formControlName="authorId">
+                  <mat-option *ngFor="let author of authors" [value]="author.id">{{author.email}}</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Pagine</mat-label>
-              <input matInput type="number" formControlName="pages"/>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Pagine</mat-label>
+                <input matInput type="number" formControlName="pages"/>
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Prezzo</mat-label>
-              <input matInput type="number" formControlName="price"/>
-            </mat-form-field>
+              <mat-form-field>
+                <mat-label>Prezzo</mat-label>
+                <input matInput type="number" formControlName="price"/>
+              </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Costo</mat-label>
-              <input matInput type="number" formControlName="cost"/>
-            </mat-form-field>
-        </div>
-      </form>
-    </mat-card-content>
-    <mat-dialog-actions style="display: flex; justify-content: flex-end;">
-      <button mat-button color="warn" (click)="back()">BACK</button>
-      <button mat-button [disabled]="!editEditorialProjectFormGroup.dirty" color="accent" (click)="reset()">RESET</button>
-      <button mat-button [disabled]="(editEditorialProjectFormGroup.invalid && editEditorialProjectFormGroup.dirty)" (click)="editEditorialProject()" color="primary">SALVA</button>
-    </mat-dialog-actions>
-  </mat-card>
+              <mat-form-field>
+                <mat-label>Costo</mat-label>
+                <input matInput type="number" formControlName="cost"/>
+              </mat-form-field>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-dialog-actions style="display: flex; justify-content: flex-end;">
+        <button mat-button [disabled]="submitted" color="warn" (click)="back()">BACK</button>
+        <button mat-button [disabled]="submitted || !editEditorialProjectFormGroup.dirty" color="accent" (click)="reset()">RESET</button>
+        <button mat-button [disabled]="(submitted || editEditorialProjectFormGroup.dirty && editEditorialProjectFormGroup.invalid)" (click)="editEditorialProject()" color="primary">SALVA</button>
+      </mat-dialog-actions>
+    </mat-card>
+  </div>
 </div>

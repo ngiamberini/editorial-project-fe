@@ -38,4 +38,10 @@ export class EditorialProjectService {
 
     return this.http.delete<EditorialProject>(url);
   }
+
+  edit(id: number, editRequest: EditorialProjectStoreModel) : Observable<EditorialProject>{
+    let url = this.baseUrl + `/${id}`;
+
+    return this.http.put<EditorialProject>(url, editRequest);
+  }
 }
